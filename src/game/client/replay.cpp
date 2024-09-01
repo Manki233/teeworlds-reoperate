@@ -11,7 +11,7 @@
 
 void CReplay :: OnInputSnap () {
     if (Status == 1) {
-        File. open ("rec.ins", std :: ios :: in | std :: ios :: out | std :: ios :: trunc);
+        File. open (FileName, std :: ios :: in | std :: ios :: out | std :: ios :: trunc);
         Status = 0;
         Frame = 0;
     }
@@ -34,7 +34,7 @@ void CReplay :: OnInputSnap () {
         File << -1 << "\n";
 
         File. close ();
-        File. open ("rec.ins", std :: ios :: in | std :: ios :: out);
+        File. open (FileName, std :: ios :: in | std :: ios :: out);
         Status = 3;
     }
 
