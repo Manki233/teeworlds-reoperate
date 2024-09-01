@@ -170,6 +170,7 @@ void CGameClient::OnConsoleInit()
 	Console()->Register("team", "i[team-id]", CFGFLAG_CLIENT, ConTeam, this, "Switch team");
 	Console()->Register("kill", "", CFGFLAG_CLIENT, ConKill, this, "Kill yourself to restart");
 	Console()->Register("ready_change", "", CFGFLAG_CLIENT, ConReadyChange7, this, "Change ready state (0.7 only)");
+
 	Console()->Register("load_replay", "", CFGFLAG_CLIENT, ConLoadReplay, this, "MANKI_REPLAY");
 
 	// register tune zone command to allow the client prediction to load tunezones from the map
@@ -428,14 +429,10 @@ void CGameClient::OnInit()
 
 void CGameClient::OnUpdate()
 {
-	dbg_msg ("1", "2");
-	
 	if (!m_Controls. m_pReplay) {
 		m_Controls. m_pReplay = new CReplay ();
 		m_Controls. m_pReplay -> pControl = &m_Controls;
 	}
-
-	dbg_msg ("1", "1");
 
 	HandleLanguageChanged();
 	CUIElementBase::Init(Ui()); // update static pointer because game and editor use separate UI

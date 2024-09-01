@@ -180,12 +180,8 @@ void CControls::OnMessage(int Msg, void *pRawMsg)
 
 int CControls::SnapInput(int *pData)
 {
-	dbg_msg ("3", "3");
-
-	if (m_pReplay)
-		m_pReplay -> OnInputSnap ();
-
-	dbg_msg ("1", "4");
+	// if (m_pReplay)
+	// 	m_pReplay -> OnInputSnap ();
 
 	// update player state
 	if(m_pClient->m_Chat.IsActive())
