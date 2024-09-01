@@ -171,9 +171,10 @@ void CGameClient::OnConsoleInit()
 	Console()->Register("kill", "", CFGFLAG_CLIENT, ConKill, this, "Kill yourself to restart");
 	Console()->Register("ready_change", "", CFGFLAG_CLIENT, ConReadyChange7, this, "Change ready state (0.7 only)");
 
-	Console()->Register("load_replay", "s[file]", CFGFLAG_CLIENT, ConLoadReplay, this, "MANKI_REPLAY");
+	Console()->Register("load_rec", "s[file]", CFGFLAG_CLIENT, ConLoadReplay, this, "MANKI_REPLAY");
+	Console()->Register("save_rec", "", CFGFLAG_CLIENT, ConSaveReplay, this, "MANKI_REPLAY");
 
-	Console()->Register("start_replay", "s[file]", CFGFLAG_CLIENT, ConStartReplay, this, "MANKI_REPLAY");
+	Console()->Register("start_rec", "s[file]", CFGFLAG_CLIENT, ConStartReplay, this, "MANKI_REPLAY");
 
 
 	// register tune zone command to allow the client prediction to load tunezones from the map
@@ -2702,6 +2703,13 @@ void CGameClient::ConStartReplay(IConsole::IResult *pResult, void *pUserData)
 {
 	((CGameClient *)pUserData)->m_Controls.m_pReplay->Status = 1;
 	((CGameClient *)pUserData)->m_Controls.m_pReplay->FileName=pResult->GetString(0)+std::string(".rki");
+}
+
+void CGameClient::ConSaveReplay(IConsole::IResult *pResult, void *pUserData)
+{
+	((CGameClient *)pUserData)->m_Controls.m_pReplay->File << -1 << "\n";
+
+    ((CGameClient *)pUserData)->m_Controls.m_pReplay->File. close ();
 }
 
 void CGameClient::ConKill(IConsole::IResult *pResult, void *pUserData)
