@@ -32,14 +32,15 @@ void CReplay :: OnInputSnap () {
     }
 
     if (Status == 3) { // load mode
-        File >> pControl -> m_aInputDirectionLeft[0];
+        if (!File >> pControl -> m_aInputDirectionLeft[0]) {
+            Status = -1;
+        }
+
         File >> pControl -> m_aInputDirectionRight[0];
         File >> pControl -> m_aInputData[0].m_Jump;
         File >> pControl -> m_aMousePos[0]. x;
         File >> pControl -> m_aMousePos[0]. y;
         File >> pControl -> m_aInputData[0].m_Fire;
         File >> pControl -> m_aInputData[0].m_Hook;
-
-        dbg_msg ("load", "loaded a frame %d, eof = %d", File.is_open(), pControl -> m_aInputData[0].m_Fire);
     }
 }
