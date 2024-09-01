@@ -171,9 +171,9 @@ void CGameClient::OnConsoleInit()
 	Console()->Register("kill", "", CFGFLAG_CLIENT, ConKill, this, "Kill yourself to restart");
 	Console()->Register("ready_change", "", CFGFLAG_CLIENT, ConReadyChange7, this, "Change ready state (0.7 only)");
 
-	Console()->Register("load_replay_m", "", CFGFLAG_CLIENT, ConLoadReplay, this, "MANKI_REPLAY");
+	Console()->Register("load_replay", "", CFGFLAG_CLIENT, ConLoadReplay, this, "MANKI_REPLAY");
 
-	Console()->Register("save_replay_m", "", CFGFLAG_CLIENT, ConSavemReplay, this, "MANKI_REPLAY");
+	Console()->Register("start_replay", "", CFGFLAG_CLIENT, ConStartReplay, this, "MANKI_REPLAY");
 
 
 	// register tune zone command to allow the client prediction to load tunezones from the map
@@ -2697,13 +2697,9 @@ void CGameClient::ConLoadReplay(IConsole::IResult *pResult, void *pUserData)
 	((CGameClient *)pUserData)->m_Controls.m_pReplay->Status = 2;
 }
 
-void CGameClient::ConSavemReplay(IConsole::IResult *pResult, void *pUserData)
+void CGameClient::ConStartReplay(IConsole::IResult *pResult, void *pUserData)
 {
-	((CGameClient *)pUserData)->m_Controls.m_pReplay->Status = 0;
-
-	((CGameClient *)pUserData)->m_Controls.m_pReplay->File.open("rec.ins",std:: ios::trunc);
-	((CGameClient *)pUserData)->m_Controls.m_pReplay->File << " ";
-	((CGameClient *)pUserData)->m_Controls.m_pReplay->File.close();
+	((CGameClient *)pUserData)->m_Controls.m_pReplay->Status = 1;
 }
 
 void CGameClient::ConKill(IConsole::IResult *pResult, void *pUserData)

@@ -12,7 +12,8 @@ class CReplay { public:
 
     void CReplay :: OnInputSnap ();
 
-    int Status = 1;
+    int Status = -1;
+    int Frame = 0;
     std :: fstream File;
 };
 
