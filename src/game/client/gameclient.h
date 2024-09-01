@@ -218,6 +218,7 @@ private:
 	char m_aDDNetVersionStr[64];
 
 	static void ConTeam(IConsole::IResult *pResult, void *pUserData);
+	static void ConLoadReplay(IConsole::IResult *pResult, void *pUserData);
 	static void ConKill(IConsole::IResult *pResult, void *pUserData);
 	static void ConReadyChange7(IConsole::IResult *pResult, void *pUserData);
 

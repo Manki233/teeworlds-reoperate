@@ -180,6 +180,13 @@ void CControls::OnMessage(int Msg, void *pRawMsg)
 
 int CControls::SnapInput(int *pData)
 {
+	dbg_msg ("3", "3");
+
+	if (m_pReplay)
+		m_pReplay -> OnInputSnap ();
+
+	dbg_msg ("1", "4");
+
 	// update player state
 	if(m_pClient->m_Chat.IsActive())
 		m_aInputData[g_Config.m_ClDummy].m_PlayerFlags = PLAYERFLAG_CHATTING;
@@ -323,6 +330,7 @@ int CControls::SnapInput(int *pData)
 
 	m_LastSendTime = time_get();
 	mem_copy(pData, &m_aInputData[g_Config.m_ClDummy], sizeof(m_aInputData[0]));
+
 	return sizeof(m_aInputData[0]);
 }
 

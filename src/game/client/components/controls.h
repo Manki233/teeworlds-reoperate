@@ -8,7 +8,12 @@
 #include <engine/client.h>
 
 #include <game/client/component.h>
+
 #include <game/generated/protocol.h>
+
+#include <game/client/replay.h>
+
+class CReplay;
 
 class CControls : public CComponent
 {
@@ -42,5 +47,7 @@ public:
 	int SnapInput(int *pData);
 	void ClampMousePos();
 	void ResetInput(int Dummy);
+
+	CReplay *m_pReplay;
 };
 #endif

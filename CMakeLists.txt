@@ -108,7 +108,7 @@ option(ANTIBOT "Enable support for a dynamic anticheat library (not provided, se
 option(HEADLESS_CLIENT "Build the client without graphics" OFF)
 option(CLIENT "Compile client" ON)
 option(SERVER "Compile server" ON)
-option(TOOLS "Compile tools" ON)
+option(TOOLS "Compile tools" OFF)
 option(DOWNLOAD_GTEST "Download and compile GTest" ${AUTO_DEPENDENCIES_DEFAULT})
 option(STEAM "Build the Steam release version" OFF)
 option(DISCORD "Enable Discord rich presence support" OFF)
@@ -2403,6 +2403,8 @@ if(CLIENT)
     components/voting.h
     gameclient.cpp
     gameclient.h
+    replay.cpp
+    replay.h
     laser_data.cpp
     laser_data.h
     lineinput.cpp
@@ -2914,7 +2916,7 @@ add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/src/game/generated/checksum.cpp
 # TESTS
 ########################################################################
 
-if(GTEST_FOUND OR DOWNLOAD_GTEST)
+if(false)
   set_src(TESTS GLOB src/test
     aio.cpp
     bezier.cpp

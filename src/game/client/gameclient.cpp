@@ -170,6 +170,7 @@ void CGameClient::OnConsoleInit()
 	Console()->Register("team", "i[team-id]", CFGFLAG_CLIENT, ConTeam, this, "Switch team");
 	Console()->Register("kill", "", CFGFLAG_CLIENT, ConKill, this, "Kill yourself to restart");
 	Console()->Register("ready_change", "", CFGFLAG_CLIENT, ConReadyChange7, this, "Change ready state (0.7 only)");
+	Console()->Register("load_replay", "", CFGFLAG_CLIENT, ConLoadReplay, this, "MANKI_REPLAY");
 
 	// register tune zone command to allow the client prediction to load tunezones from the map
 	Console()->Register("tune_zone", "i[zone] s[tuning] f[value]", CFGFLAG_GAME, ConTuneZone, this, "Tune in zone a variable to value");
@@ -427,8 +428,16 @@ void CGameClient::OnInit()
 
 void CGameClient::OnUpdate()
 {
-	HandleLanguageChanged();
+	dbg_msg ("1", "2");
+	
+	if (!m_Controls. m_pReplay) {
+		m_Controls. m_pReplay = new CReplay ();
+		m_Controls. m_pReplay -> pControl = &m_Controls;
+	}
 
+	dbg_msg ("1", "1");
+
+	HandleLanguageChanged();
 	CUIElementBase::Init(Ui()); // update static pointer because game and editor use separate UI
 
 	// handle mouse movement
@@ -2681,6 +2690,11 @@ void CGameClient::SendReadyChange7()
 void CGameClient::ConTeam(IConsole::IResult *pResult, void *pUserData)
 {
 	((CGameClient *)pUserData)->SendSwitchTeam(pResult->GetInteger(0));
+}
+
+void CGameClient::ConLoadReplay(IConsole::IResult *pResult, void *pUserData)
+{
+	((CGameClient *)pUserData)->m_Controls.m_pReplay->Status = 2;
 }
 
 void CGameClient::ConKill(IConsole::IResult *pResult, void *pUserData)
